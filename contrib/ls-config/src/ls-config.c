@@ -2,7 +2,9 @@
 #include <stdlib.h>
 #include <limits.h>
 #include <string.h>
+#ifdef HAVE_UNISTD_H
 #include <unistd.h>
+#endif /* HAVE_UNISTD_H */
 #include <getopt.h>
 #include <locale.h>
 #include <libintl.h>

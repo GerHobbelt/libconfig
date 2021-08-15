@@ -64,7 +64,7 @@
    getting matched.  Store it in a pointer rather than an array
    because some compilers will just produce instructions to fill the
    array rather than assigning a pointer to a static array.  */
-char* info_compiler = "INFO" ":" "compiler[" COMPILER_ID "]";
+const char* info_compiler = "INFO" ":" "compiler[" COMPILER_ID "]";
 
 /* Identify known platforms by name.  */
 #if defined(__linux) || defined(__linux__) || defined(linux)
@@ -154,7 +154,7 @@ char* info_compiler = "INFO" ":" "compiler[" COMPILER_ID "]";
    getting matched.  Store it in a pointer rather than an array
    because some compilers will just produce instructions to fill the
    array rather than assigning a pointer to a static array.  */
-char* info_platform = "INFO" ":" "platform[" PLATFORM_ID "]";
+const char* info_platform = "INFO" ":" "platform[" PLATFORM_ID "]";
 
 
 /*--------------------------------------------------------------------------*/
