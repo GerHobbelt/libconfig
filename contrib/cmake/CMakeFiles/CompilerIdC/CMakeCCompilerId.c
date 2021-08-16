@@ -171,7 +171,7 @@ char* info_platform = "INFO" ":" "platform[" PLATFORM_ID "]";
 #ifdef ID_VOID_MAIN
 void main() {}
 #else
-int main(int argc, char* argv[])
+int main(int argc, const char* argv[])
 {
   int require = 0;
   require += info_compiler[argc];
