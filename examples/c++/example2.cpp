@@ -32,7 +32,12 @@ using namespace libconfig;
 // movie record to the movies list, and writes the updated configuration to
 // 'updated.cfg'.
 
-int main(int argc, char **argv)
+
+#if defined(BUILD_MONOLITHIC)
+#define main(cnt, arr)      config_example2pp_main(cnt, arr)
+#endif
+
+int main(int argc, const char** argv)
 {
   static const char *output_file = "updated.cfg";
 

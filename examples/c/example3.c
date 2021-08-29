@@ -28,7 +28,12 @@
  * 'newconfig.cfg'.
  */
 
-int main(int argc, char **argv)
+
+#if defined(BUILD_MONOLITHIC)
+#define main(cnt, arr)      config_example3_main(cnt, arr)
+#endif
+
+int main(int argc, const char** argv)
 {
   static const char *output_file = "newconfig.cfg";
   config_t cfg;

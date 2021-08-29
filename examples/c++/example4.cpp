@@ -31,7 +31,12 @@ using namespace libconfig;
 // This example demonstrates the handling of parsing errors in
 // 'invalid.cfg'.
 
-int main(int argc, char **argv)
+
+#if defined(BUILD_MONOLITHIC)
+#define main(cnt, arr)      config_example4pp_main(cnt, arr)
+#endif
+
+int main(int argc, const char** argv)
 {
   Config cfg;
 

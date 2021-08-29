@@ -115,7 +115,13 @@ static const char **include_func(config_t *config,
   return((const char **)result);
 }
 
-int main(int argc, char **argv)
+
+
+#if defined(BUILD_MONOLITHIC)
+#define main(cnt, arr)      config_example4_main(cnt, arr)
+#endif
+
+int main(int argc, const char** argv)
 {
   config_t cfg;
 

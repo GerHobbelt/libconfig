@@ -31,7 +31,12 @@ using namespace libconfig;
 // This example constructs a new configuration in memory and writes it to
 // 'newconfig.cfg'.
 
-int main(int argc, char **argv)
+
+#if defined(BUILD_MONOLITHIC)
+#define main(cnt, arr)      config_example3pp_main(cnt, arr)
+#endif
+
+int main(int argc, const char** argv)
 {
   static const char *output_file = "newconfig.cfg";
   Config cfg;

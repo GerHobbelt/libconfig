@@ -31,7 +31,12 @@ using namespace libconfig;
 // This example reads the configuration file 'example.cfg' and displays
 // some of its contents.
 
-int main(int argc, char **argv)
+
+#if defined(BUILD_MONOLITHIC)
+#define main(cnt, arr)      config_example1pp_main(cnt, arr)
+#endif
+
+int main(int argc, const char** argv)
 {
   Config cfg;
 
