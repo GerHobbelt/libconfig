@@ -20,8 +20,12 @@
    ----------------------------------------------------------------------------
 */
 
+#ifdef HAVE_DIRENT_H
 #include <dirent.h>
+#endif
+#ifdef HAVE_FNMATCH_H
 #include <fnmatch.h>
+#endif
 #include <limits.h>
 #include <stdio.h>
 #include <stdlib.h>

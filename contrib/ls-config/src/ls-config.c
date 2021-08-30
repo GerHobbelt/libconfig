@@ -5,9 +5,13 @@
 #ifdef HAVE_UNISTD_H
 #include <unistd.h>
 #endif /* HAVE_UNISTD_H */
+#ifdef HAVE_GETOPT_H
 #include <getopt.h>
+#endif
 #include <locale.h>
+#ifdef HAVE_LIBINTL_H
 #include <libintl.h>
+#endif
 #include <errno.h>
 #include <sys/types.h>
 #include <sys/stat.h>

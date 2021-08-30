@@ -25,7 +25,7 @@
 #include <stdarg.h>
 #include <stdio.h>
 
-#ifdef WIN32
+#if defined(WIN32) || defined(WIN64) || defined(_WIN32)
 #include <io.h>
 #define F_OK 4  // Windows doesn't have F_OK
 #else
