@@ -47,6 +47,10 @@
 #include "scanner.h"
 #include "util.h"
 
+#if defined(_WIN32)
+#include <io.h>
+#endif
+
 #define PATH_TOKENS ":./"
 #define CHUNK_SIZE 16
 #define DEFAULT_TAB_WIDTH 2
@@ -79,8 +83,7 @@ static void __config_write_setting(const config_t *config,
 
 static void __config_locale_override(void)
 {
-#if (defined(WIN32) || defined(_WIN32) || defined(__WIN32__)) \
-  && ! defined(__MINGW32__)
+#if (defined(WIN32) || defined(_WIN32) || defined(__WIN32__))
 
   _configthreadlocale(_ENABLE_PER_THREAD_LOCALE);
   setlocale(LC_NUMERIC, "C");
@@ -106,8 +109,7 @@ static void __config_locale_override(void)
 
 static void __config_locale_restore(void)
 {
-#if (defined(WIN32) || defined(_WIN32) || defined(__WIN32__)) \
-  && ! defined(__MINGW32__)
+#if (defined(WIN32) || defined(_WIN32) || defined(__WIN32__))
 
     _configthreadlocale(_DISABLE_PER_THREAD_LOCALE);
 
@@ -700,7 +702,12 @@ int config_write_file(config_t *config, const char *filename)
 
     if(fd >= 0)
     {
-      if(fsync(fd) != 0)
+#if defined(_WIN32)
+      int fsync_res = _commit(fd);
+#else
+      int fsync_res = fsync(fd);
+#endif
+      if(fsync_res != 0)
       {
         fclose(stream);
         config->error_text = __io_error;
