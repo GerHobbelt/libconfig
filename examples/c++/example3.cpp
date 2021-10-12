@@ -38,6 +38,9 @@ using namespace libconfig;
 
 int main(int argc, const char** argv)
 {
+  (void)argc;
+  (void)argv;
+
   static const char *output_file = "newconfig.cfg";
   Config cfg;
 
