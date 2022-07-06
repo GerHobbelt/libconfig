@@ -11,6 +11,8 @@
 #include <locale.h>
 #ifdef HAVE_LIBINTL_H
 #include <libintl.h>
+#else
+#define gettext(x)  x
 #endif
 #include <errno.h>
 #include <sys/types.h>
