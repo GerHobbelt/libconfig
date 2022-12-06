@@ -655,7 +655,7 @@ int config_read_file(config_t *config, const char *filename)
   if(stream != NULL)
   {
     // On some operating systems, fopen() succeeds on a directory.
-    int fd = fileno(stream);
+    int fd = posix_fileno(stream);
     struct stat statbuf;
 
     if(fstat(fd, &statbuf) == 0)
@@ -698,14 +698,14 @@ int config_write_file(config_t *config, const char *filename)
 
   if(config_get_option(config, CONFIG_OPTION_FSYNC))
   {
-    int fd = fileno(stream);
+    int fd = posix_fileno(stream);
 
     if(fd >= 0)
     {
 #if defined(_WIN32)
       int fsync_res = _commit(fd);
 #else
-      int fsync_res = fsync(fd);
+      int fsync_res = posix_fsync(fd);
 #endif
       if(fsync_res != 0)
       {
@@ -1205,7 +1205,7 @@ int config_setting_set_string(config_setting_t *setting, const char *value)
 
 /* ------------------------------------------------------------------------- */
 
-int config_setting_set_format(config_setting_t *setting, short format)
+int config_setting_set_format(config_setting_t *setting, unsigned short format)
 {
   if(((setting->type != CONFIG_TYPE_INT)
       && (setting->type != CONFIG_TYPE_INT64))
@@ -1219,7 +1219,7 @@ int config_setting_set_format(config_setting_t *setting, short format)
 
 /* ------------------------------------------------------------------------- */
 
-short config_setting_get_format(const config_setting_t *setting)
+unsigned short config_setting_get_format(const config_setting_t *setting)
 {
   return(setting->format != 0 ? setting->format
          : setting->config->default_format);

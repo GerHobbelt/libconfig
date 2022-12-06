@@ -33,6 +33,7 @@
 #define _STDLIB_H
 #endif
 
+#include <io.h>
 #include <malloc.h>
 
 #ifdef _MSC_VER
@@ -42,7 +43,13 @@
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h>
 
-#define fileno _fileno
+#define posix_fileno _fileno
+#define posix_write  _write
+
+/* Might be able to replace this with:
+#define posix_fsync  _commit
+*/
+extern int posix_fsync(int fd);
 
 #if _MSC_VER <= 1800
 #define snprintf  _snprintf
@@ -63,6 +70,10 @@
 #if (defined(WIN32) || defined(_WIN32) || defined(__WIN32__) \
   || defined(WIN64) || defined(_WIN64) || defined(__WIN64__) \
   || defined(__MINGW32__))
+
+#ifndef STDERR_FILENO
+#define STDERR_FILENO 2
+#endif
 
 #define INT64_FMT "%I64d"
 #define UINT64_FMT "%I64u"
@@ -101,17 +112,19 @@
 #define IS_RELATIVE_PATH(P) \
   (PathIsRelativeA(P))
 
-extern int fsync(int fd);
+#else /* !( defined(WIN32/WIN64) && ! defined(__MINGW32__) ) */
 
-#else /* defined(WIN32/WIN64) && ! defined(__MINGW32__) */
+#include <unistd.h> /* for fsync() */
+
+#define posix_fileno fileno
+#define posix_fsync  fsync
+#define posix_write  write
 
 #define INT64_CONST(I)  (I ## LL)
 #define UINT64_CONST(I) (I ## ULL)
 
 #define IS_RELATIVE_PATH(P) \
   ((P)[0] != '/')
-
-#include <unistd.h> /* for fsync() */
 
 #endif /* defined(WIN32/WIN64) && ! defined(__MINGW32__) */
 
