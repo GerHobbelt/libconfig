@@ -1140,7 +1140,7 @@ int read_config(char *configFile, char *dataPath, struct flags optflags) {
 	return 0;
 }
 
-int main(int argc, char **argv) {
+int main(int argc, const char **argv) {
 	//firs set locale and domain to work with internationalization
 	setlocale(LC_ALL, "");
 	bindtextdomain("ls-config", "/usr/share/locale");
