@@ -28,7 +28,7 @@ extern "C" {
 #endif /* __cplusplus */
 
 #if defined(_WIN32) || defined(__WIN32__) || defined(WIN32)
-#if defined(LIBCONFIG_STATIC)
+#if defined(LIBCONFIG_STATIC) || defined(BUILD_MONOLITHIC)
 #define LIBCONFIG_API
 #elif defined(LIBCONFIG_EXPORTS)
 #define LIBCONFIG_API __declspec(dllexport)
