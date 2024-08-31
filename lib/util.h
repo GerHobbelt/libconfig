@@ -22,6 +22,7 @@
 
 #include <string.h>
 #include <sys/types.h>
+#include <stdint.h>
 
 extern void libconfig_set_fatal_error_func(void (*func)(const char *));
 
