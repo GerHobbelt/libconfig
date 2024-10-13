@@ -31,16 +31,16 @@ struct flags {
 	int types; //set for printout config variables types
 	int values; //set for printout config variables values
 	int indexes; //set for printout config variables indexes
-	int counter; //set for printout config varibales counting (for grout, list, array. in other cases it return 1)
-	int unset; //unset valriable
+	int counter; //set for printout config variables counting (for grout, list, array. in other cases it return 1)
+	int unset; //unset variable
 	int boolstring; //set for output bool variable (0|1) as test (false|true)
 	int mode; //1 - for setting variable, 0 - for get hist data
 	int error; //error status handling
 };
 
-//take valur from input and comvert it to int
+//take value from input and convert it to int
 //TODO: Read long too
-int getNumber() {
+int getNumber(void) {
   char buf[1000];
   int test,val;
   unsigned int inp;
@@ -52,12 +52,12 @@ int getNumber() {
   return (int) 0;
 }
 
-//printout help messsage
-void printHelp() {
+//printout help message
+void printHelp(void) {
 	printf(gettext("Configuration file handling\n"));
 	printf("\n");
 	printf(gettext("Usage: ls-config [OPTION]\n"));
-	printf(gettext("Reading and writening data from configuration files\n"));
+	printf(gettext("Reading and writing data from configuration files\n"));
 	printf(gettext("in libconfig9 format.\n"));
 	printf("\n");
 	printf(gettext("CAUTION: using without given config file are cause error!\n"));
@@ -92,7 +92,7 @@ void printHelp() {
 	printf("\n");
 	printf("(c) 2013 by LucaS web sutio - http://www.lucas.net.pl\n");
 	printf("Author: Łukasz A. Grabowski\n");
-   printf(gettext("Licence: "));
+   printf(gettext("License: "));
 	printf("GPL v2.\n");
    exit(0);
 };
